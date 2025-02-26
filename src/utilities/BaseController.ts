@@ -33,6 +33,10 @@ export default class BaseController
         promise.catch((err: Error) => {
             if (err.name === 'NotFound') {
                 toto.sendNotFoundError(resp, err);
+            } else if (err.name === 'NothingChanged') {
+                resp.send({
+                    'message': 'No change detected'
+                });
             } else if (err.name === 'ValidationError') {
                 toto.sendValidationError(resp, err);
             } else {

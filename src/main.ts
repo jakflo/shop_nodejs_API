@@ -6,6 +6,7 @@ import OrderController from './order/OrderController';
 import NewOrderController from './newOrder/NewOrderController';
 import CurrencyController from './currency/CurrencyController';
 import OrderStatesController from './orderStates/OrderStatesController';
+import EditOrderController from './editOrder/EditOrderController';
 
 var app = express();
 app.use(express.json());
@@ -32,6 +33,11 @@ app.get('/currencies/', (req, resp) => {
 app.post('/new_order/', (req, resp) => {
     var newOrderController = new NewOrderController();
     newOrderController.render(req, resp);
+});
+
+app.put('/edit_order/', (req, resp) => {
+    var editOrderController = new EditOrderController();
+    editOrderController.render(req, resp);
 });
 
 // Start the Express server
