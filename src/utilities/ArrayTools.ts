@@ -1,6 +1,6 @@
 export default class ArrayTools
 {
-    arrayColumn(input: Array<Object>, columnName: string): Array<any>
+    arrayColumn(input: Array<object>, columnName: string): Array<any>
     {
         var output = [];
         var k;

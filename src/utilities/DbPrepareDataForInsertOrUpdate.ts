@@ -11,7 +11,7 @@ export default class DbPrepareDataForInsertOrUpdate
      * prida zaznam k INSERT nebo UPDATE
      * @param {Object} data - objekt s {nazevSloupce: hodnota}
      */
-    addRow(data: Object)
+    addRow(data: object)
     {
         var k;
         var columnNames = [];
@@ -19,7 +19,7 @@ export default class DbPrepareDataForInsertOrUpdate
         var placeholdersForUpdate = [];
         var values = [];
         
-        if (data.length === 0) {
+        if (Object.keys(data).length === 0) {
             throw new Error('row cant be empty');
         }
         
@@ -40,7 +40,7 @@ export default class DbPrepareDataForInsertOrUpdate
         return this;
     }
 
-    insertMultipleRows(dataArray: Array<Object>)
+    insertMultipleRows(dataArray: Array<object>)
     {
         var toto = this;
         dataArray.forEach((row) => {

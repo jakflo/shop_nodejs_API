@@ -41,7 +41,7 @@ export default class DbWrap
         });
     }    
 
-    queryAll(sql: string, args: Array<any> = []): Promise<Array<Object>|false>
+    queryAll(sql: string, args: Array<any> = []): Promise<Array<object>|false>
     {
         return new Promise((resolve, reject)=> {
             if (this.#connectionClosedByError){
@@ -67,13 +67,13 @@ export default class DbWrap
                     return reject(err);
                 }
                 
-                type rows = Array<Object>|false;
+                type rows = Array<object>|false;
                 resolve(rows);
             });
         });
     }
 
-    async queryRow(sql: string, args: Array<any> = []): Promise<Object|false>
+    async queryRow(sql: string, args: Array<any> = []): Promise<object|false>
     {
         var rows = await this.queryAll(sql, args);
         if (rows !== false) {
@@ -84,7 +84,7 @@ export default class DbWrap
         return row;
     }    
 
-    async queryColumn(sql: string, args: Array<any> = [], columnName: string): Promise<Object|false>
+    async queryColumn(sql: string, args: Array<any> = [], columnName: string): Promise<Array<any>|false>
     {
         var rows = await this.queryAll(sql, args);
         var result = [];
@@ -110,7 +110,7 @@ export default class DbWrap
         }
     }
 
-    async insertRow(tableName: string, row: Object): Promise<number>
+    async insertRow(tableName: string, row: object): Promise<number>
     {
         var preparedData = new DbPrepareDataForInsertOrUpdate();
         preparedData.addRow(row);
@@ -131,7 +131,7 @@ export default class DbWrap
         return true;
     }
 
-    async updateRow(tableName: string, row: Array<Object>, whereSql: string, whereParams: Array<any>)
+    async updateRow(tableName: string, row: object, whereSql: string, whereParams: Array<any>)
     {
         var preparedData = new DbPrepareDataForInsertOrUpdate();
         preparedData.addRow(row);
@@ -167,9 +167,14 @@ export default class DbWrap
     async checkTableExists(tableName: string)
     {
         var foundTablesRaw = await this.queryAll("SHOW TABLES");
-        var keyname = Object.keys(foundTablesRaw[0])[0];
-        var arrayTools = new ArrayTools();
-        var foundTables = arrayTools.arrayColumn(foundTablesRaw, keyname);
+        
+        if (foundTablesRaw !== false) {
+            var keyname = Object.keys(foundTablesRaw[0])[0];
+            var arrayTools = new ArrayTools();
+            var foundTables = arrayTools.arrayColumn(foundTablesRaw, keyname);
+        } else {
+            var foundTables = [];
+        }
         
         if (!foundTables.includes(tableName)) {
             throw new Error('Table not found');

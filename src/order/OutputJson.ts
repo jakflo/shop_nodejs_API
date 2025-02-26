@@ -3,8 +3,12 @@ import {OrderData, OrderItem} from './OrderModel';
 
 export default class OutputJson
 {
-    formatData(orderData: OrderData, orderItems: Array<OrderItem>)
+    formatData(orderData: OrderData|false, orderItems: Array<OrderItem>|false)
     {
+        if (orderData === false) {
+            return [];
+        }
+        
         var dateTools = new DateTools();
         return {
             id: orderData.id, 
@@ -29,8 +33,12 @@ export default class OutputJson
         };
     }
     
-    #formatOrderItems(orderItems: Array<OrderItem>)
+    #formatOrderItems(orderItems: Array<OrderItem>|false)
     {
+        if (orderItems === false) {
+            return [];
+        }
+        
         var k;
         var items = [];
         
