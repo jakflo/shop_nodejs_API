@@ -7,6 +7,8 @@ import NewOrderController from './newOrder/NewOrderController';
 import CurrencyController from './currency/CurrencyController';
 import OrderStatesController from './orderStates/OrderStatesController';
 import EditOrderController from './editOrder/EditOrderController';
+import ItemsController from './item/ItemsController';
+import UserController from './user/UserController';
 
 var app = express();
 app.use(express.json());
@@ -28,6 +30,16 @@ app.get('/order_states/', (req, resp) => {
 app.get('/currencies/', (req, resp) => {
     var currencyController = new CurrencyController();
     currencyController.render(req, resp);
+});
+
+app.get('/items/', (req, resp) => {
+    var itemsController = new ItemsController();
+    itemsController.render(req, resp);
+});
+
+app.get('/users/', (req, resp) => {
+    var userController = new UserController();
+    userController.render(req, resp);
 });
 
 app.post('/new_order/', (req, resp) => {

@@ -7,7 +7,7 @@ import NotEmptyArray from '../validator/NotEmptyArray';
 import UserExists from '../validator/UserExists';
 import CurrencyModel from '../currency/CurrencyModel';
 import ArrayTools from '../utilities/ArrayTools';
-import ItemsModel from '../utilities/ItemsModel';
+import ItemsModel from '../item/ItemsModel';
 import {ItemInOrder} from '../utilities/Types';
 
 export default class NewOrderValidator extends BaseValidator

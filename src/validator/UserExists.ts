@@ -1,5 +1,5 @@
 import BaseValidator from './BaseValidator';
-import UserModel from '../utilities/UserModel';
+import UserModel from '../user/UserModel';
 
 export default class UserExists extends BaseValidator
 {
