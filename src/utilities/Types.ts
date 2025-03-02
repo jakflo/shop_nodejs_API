@@ -19,7 +19,7 @@ interface ItemInOrder
 interface Item
 {
     id: number, 
-    currency_id: number, 
+    currency: string, 
     name: string, 
     price: number
 }

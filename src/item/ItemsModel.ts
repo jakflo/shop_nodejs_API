@@ -10,7 +10,11 @@ export default class ItemsModel extends BaseModel
 
     async getAllItems(): Promise<Array<Item>>
     {
-        var foundItems = await this._db.queryAll("SELECT * FROM item");
+        var foundItems = await this._db.queryAll(
+        "SELECT i.id, i.name, i.price, c.name AS currency "+
+        "FROM item i "+
+        "JOIN currency c ON i.currency_id = c.id"
+        );
         if (foundItems === false) {
             return [];
         }
